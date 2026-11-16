@@ -22,6 +22,10 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use((req, res, next) => {
+  requestCounter += 1;
+  next();
+});
 
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
