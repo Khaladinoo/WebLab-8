@@ -42,3 +42,90 @@
 
 ## Challenges Faced
 - Adapting to Express 5's path-matching rules, which reject legacy `app.get('*')` wildcards, resolved cleanly via a final `app.use()` fallback middleware.
+
+## Testing Evidence
+
+### 1. Successful JSON Response (`GET /api/courses`)
+```http
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 183
+ETag: W/"b7-Kc8hGqcY/yYdSczJnQtfhOpe/UA"
+Date: Mon, 16 Nov 2026 08:22:27 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+[{"id":1,"title":"Web Application Development","credits":4},{"id":2,"title":"Database Management Systems","credits":3},{"id":3,"title":"Operating Systems & Architecture","credits":4}]
+```
+
+### 2. Created Response (`POST /api/subscribe`)
+```http
+HTTP/1.1 201 Created
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 19
+ETag: W/"13-oWAPIqDXuocNexKhPYW9ayyk98c"
+Date: Mon, 16 Nov 2026 08:22:33 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"subscribed":true}
+```
+
+### 3. Forbidden Response (`GET /api/admin`)
+```http
+HTTP/1.1 403 Forbidden
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 21
+ETag: W/"15-TLNzmZqKxaTuFdX/dVWWPBu44/c"
+Date: Mon, 16 Nov 2026 08:22:39 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"error":"Forbidden"}
+```
+
+### 4. Redirect Response (`GET /old-page`)
+```http
+HTTP/1.1 302 Found
+X-Powered-By: Express
+Location: /hello
+Vary: Accept
+Content-Type: text/plain; charset=utf-8
+Content-Length: 28
+Date: Mon, 16 Nov 2026 08:22:44 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+Found. Redirecting to /hello
+```
+
+### 5. 404 Not Found on API Path (`GET /api/unknown`)
+```http
+HTTP/1.1 404 Not Found
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 21
+ETag: W/"15-bm7tJgu8FHlq5QU+Y6gDxOGPfRc"
+Date: Mon, 16 Nov 2026 08:22:50 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"error":"Not found"}
+```
+
+### 6. 404 Not Found on Non-API Path (`GET /unknown-page`)
+```http
+HTTP/1.1 404 Not Found
+X-Powered-By: Express
+Content-Type: text/plain; charset=utf-8
+Content-Length: 20
+ETag: W/"14-IjpWptXxNNmy9uyakQZfBTjB+5M"
+Date: Mon, 16 Nov 2026 08:22:56 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+404 - Page Not Found
+```
