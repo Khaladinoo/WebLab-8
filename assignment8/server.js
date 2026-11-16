@@ -27,6 +27,8 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
 });
