@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Computer Engineering Study Programme</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Computer Engineering Study Programme</h1>
+      <p>Welcome to our academic portal. Use the interactive controls below to test each backend API route directly from your browser.</p>
+    </header>
+
+    <section class="controls">
+      <h2>Test API Endpoints</h2>
+      <div class="button-group">
+        <button data-url="/api/courses" data-method="GET">GET /api/courses</button>
+        <button data-url="/api/status" data-method="GET">GET /api/status</button>
+        <button data-url="/api/headers" data-method="GET">GET /api/headers</button>
+        <button data-url="/api/subscribe" data-method="POST" class="btn-post">POST /api/subscribe</button>
+        <button data-url="/api/admin" data-method="GET" class="btn-warn">GET /api/admin</button>
+        <button data-url="/api/stats" data-method="GET">GET /api/stats</button>
+        <button data-url="/api/nonexistent" data-method="GET" class="btn-error">GET /api/nonexistent (404)</button>
+      </div>
+    </section>
+
+    <section class="output">
+      <h3>Response Status: <span id="status-code">-</span></h3>
+      <pre id="response-body">Click any button above to inspect the server response...</pre>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
